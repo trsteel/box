@@ -1,6 +1,6 @@
 package combination
 
-// Pair is a combination of two element.
+// Pair is a combination of two elements.
 type Pair[T any, R any] struct {
 	First  T
 	Second R
