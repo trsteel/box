@@ -1,17 +1,16 @@
 package slice
 
 import (
-	"github.com/trsteel/box/functions"
 	"github.com/trsteel/box/structs/combination"
 )
 
 // Sorter implements sort.Interface.
 type Sorter[T any] struct {
-	*combination.Pair[Slice[T], functions.CompareFunc[T]]
+	*combination.Pair[Slice[T], func(T, T) bool]
 }
 
 // NewSorter returns a struct pointer.
-func NewSorter[T any](slice Slice[T], less functions.CompareFunc[T]) *Sorter[T] {
+func NewSorter[T any](slice Slice[T], less func(T, T) bool) *Sorter[T] {
 	return &Sorter[T]{Pair: combination.NewPair(slice, less)}
 }
 
