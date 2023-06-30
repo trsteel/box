@@ -1,4 +1,4 @@
-package combination
+package combinations
 
 import (
 	"testing"
