@@ -11,6 +11,10 @@ func TestTernary(t *testing.T) {
 	assert.False(t, Ternary(false, true, false))
 }
 
+func TestSortedKeys(t *testing.T) {
+	assert.Equal(t, []string{"a", "b", "c"}, SortedKeys(map[string]struct{}{"c": {}, "b": {}, "a": {}}))
+}
+
 func TestContainsKey(t *testing.T) {
 	assert.True(t, ContainsKey(map[string]struct{}{"a": {}}, "a"))
 	assert.False(t, ContainsKey(map[string]struct{}{}, "a"))

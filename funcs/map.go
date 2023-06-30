@@ -2,7 +2,18 @@ package funcs
 
 import (
 	basicfuncs "github.com/trsteel/box/funcs/basic"
+	"golang.org/x/exp/constraints"
 )
+
+// Keys returns all keys of map.
+func Keys[K comparable, V any](m map[K]V) []K {
+	return basicfuncs.Keys(m)
+}
+
+// SortedKeys returns all keys of map in order.
+func SortedKeys[K constraints.Ordered, V any](m map[K]V) []K {
+	return basicfuncs.SortedKeys(m)
+}
 
 // ContainsKey returns whether key is present in map.
 func ContainsKey[K comparable, V any](m map[K]V, key K) bool {
