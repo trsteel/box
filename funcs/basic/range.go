@@ -21,7 +21,7 @@ func ForEachPtr[T any](slice []T, f func(*T) bool) bool {
 }
 
 // ForEachKV apply f to each KV pair of map until f returns false.
-func ForEachKV[K comparable, V any](m map[K]V, f func(K, V) bool) bool {
+func ForEachKV[M ~map[K]V, K comparable, V any](m M, f func(K, V) bool) bool {
 	for k, v := range m {
 		if !f(k, v) {
 			return false

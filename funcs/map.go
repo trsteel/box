@@ -3,34 +3,40 @@ package funcs
 import (
 	basicfuncs "github.com/trsteel/box/funcs/basic"
 	"golang.org/x/exp/constraints"
+	"golang.org/x/exp/maps"
 )
 
 // Keys returns all keys of map.
-func Keys[K comparable, V any](m map[K]V) []K {
-	return basicfuncs.Keys(m)
+func Keys[M ~map[K]V, K comparable, V any](m M) []K {
+	return maps.Keys(m)
+}
+
+// Values returns all values of map.
+func Values[M ~map[K]V, K comparable, V any](m M) []V {
+	return maps.Values(m)
 }
 
 // SortedKeys returns all keys of map in order.
-func SortedKeys[K constraints.Ordered, V any](m map[K]V) []K {
+func SortedKeys[M ~map[K]V, K constraints.Ordered, V any](m M) []K {
 	return basicfuncs.SortedKeys(m)
 }
 
 // ContainsKey returns whether key is present in map.
-func ContainsKey[K comparable, V any](m map[K]V, key K) bool {
+func ContainsKey[M ~map[K]V, K comparable, V any](m M, key K) bool {
 	return basicfuncs.ContainsKey(m, key)
 }
 
 // ContainsAnyKey returns whether any key is present in map.
-func ContainsAnyKey[K comparable, V any](m map[K]V, keys []K) bool {
+func ContainsAnyKey[M ~map[K]V, K comparable, V any](m M, keys []K) bool {
 	return basicfuncs.ContainsAnyKey(m, keys)
 }
 
 // ContainsAllKeys returns whether all keys are present in map.
-func ContainsAllKeys[K comparable, V any](m map[K]V, keys []K) bool {
+func ContainsAllKeys[M ~map[K]V, K comparable, V any](m M, keys []K) bool {
 	return basicfuncs.ContainsAllKeys(m, keys)
 }
 
 // ForEachKV apply f to each KV pair of map until f returns false.
-func ForEachKV[K comparable, V any](m map[K]V, f func(K, V) bool) bool {
+func ForEachKV[M ~map[K]V, K comparable, V any](m M, f func(K, V) bool) bool {
 	return basicfuncs.ForEachKV(m, f)
 }

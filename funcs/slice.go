@@ -38,3 +38,8 @@ func Reverse[T any](slice []T) {
 		slice[i], slice[j] = slice[j], slice[i]
 	}
 }
+
+// Pack returns a slice built by elems
+func Pack[T any](elems ...T) []T {
+	return elems
+}
