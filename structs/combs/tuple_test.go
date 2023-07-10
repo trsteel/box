@@ -1,4 +1,4 @@
-package combinations
+package combs
 
 import (
 	"testing"

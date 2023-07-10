@@ -1,4 +1,4 @@
-package combinations
+package combs
 
 // Tuple is a combination of three elements.
 type Tuple[T any, R any, S any] struct {

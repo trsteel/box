@@ -1,4 +1,4 @@
-package combinations
+package combs
 
 // Pair is a combination of two elements.
 type Pair[T any, R any] struct {
