@@ -43,3 +43,21 @@ func Reverse[T any](slice []T) {
 func Pack[T any](elems ...T) []T {
 	return elems
 }
+
+// Map manipulates a slice and transforms it to a slice of another type.
+func Map[T any, R any](slice []T, iteratee func(item T) R) []R {
+	result := make([]R, len(slice))
+	for i := 0; i < len(slice); i++ {
+		result[i] = iteratee(slice[i])
+	}
+	return result
+}
+
+// MapPtr manipulates a slice and transforms each element's pointer of it to a slice of another type.
+func MapPtr[T any, R any](slice []T, iteratee func(item *T) R) []R {
+	result := make([]R, len(slice))
+	for i := 0; i < len(slice); i++ {
+		result[i] = iteratee(&slice[i])
+	}
+	return result
+}

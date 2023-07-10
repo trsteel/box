@@ -7,7 +7,7 @@ type Set[T comparable] map[T]any
 
 // NewSet initializes a new Set instance with all elements added.
 func NewSet[T comparable](elems ...T) Set[T] {
-	s := Set[T]{}
+	s := make(Set[T], len(elems))
 	s.Add(elems...)
 	return s
 }
