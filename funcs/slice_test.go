@@ -5,6 +5,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	basicfuncs "github.com/trsteel/box/funcs/basic"
 )
 
 func TestReverse(t *testing.T) {
@@ -18,5 +20,9 @@ func TestMap(t *testing.T) {
 }
 
 func TestMapPtr(t *testing.T) {
-	assert.Equal(t, []string{"1", "2", "3"}, MapPtr([]int{1, 2, 3}, Combine(FromPtr[int], strconv.Itoa)))
+	assert.Equal(t, []string{"1", "2", "3"}, MapPtr([]int{1, 2, 3}, basicfuncs.Combine(FromPtr[int], strconv.Itoa)))
+}
+
+func TestRepeat(t *testing.T) {
+	assert.Equal(t, []int{1, 1, 1}, Repeat(3, 1))
 }
