@@ -8,7 +8,7 @@ func ToPtr[T any](x T) *T {
 // FromPtr returns the pointer value or empty.
 func FromPtr[T any](x *T) T {
 	if x == nil {
-		return Empty[T]()
+		return Zero[T]()
 	}
 	return *x
 }
