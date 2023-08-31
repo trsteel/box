@@ -31,6 +31,11 @@ func ReflectOR[T any](value any, fallback T) T {
 	return fallback
 }
 
+// Swap two args.
+func Swap[T any, R any](first T, second R) (R, T) {
+	return second, first
+}
+
 // SortedKeys returns all keys of map in order.
 func SortedKeys[M ~map[K]V, K constraints.Ordered, V any](m M) []K {
 	keys := maps.Keys(m)

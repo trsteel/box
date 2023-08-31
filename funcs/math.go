@@ -11,13 +11,13 @@ func Equal[T comparable](a, b T) bool {
 	return a == b
 }
 
-// Less returns if a is less than b
-func Less[T constraints.Ordered](a, b T) bool {
+// LessThan returns if a is less than b
+func LessThan[T constraints.Ordered](a, b T) bool {
 	return a < b
 }
 
-// Larger returns if a is larger than b
-func Larger[T constraints.Ordered](a, b T) bool {
+// LargerThan returns if a is larger than b
+func LargerThan[T constraints.Ordered](a, b T) bool {
 	return a > b
 }
 

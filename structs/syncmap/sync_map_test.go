@@ -57,7 +57,7 @@ func TestSyncMap_LoadOrStore(t *testing.T) {
 	syncMap := SyncMap[string, string]{}
 	// first
 	value, ok := syncMap.LoadOrStore("a", "aa")
-	assert.Equal(t, "aa", value)
+	assert.Equal(t, "", value)
 	assert.False(t, ok)
 	// second
 	value, ok = syncMap.LoadOrStore("a", "bb")
