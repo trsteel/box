@@ -4,7 +4,6 @@ import (
 	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/slices"
 
-	basicfuncs "github.com/trsteel/box/funcs/basic"
 	"github.com/trsteel/box/structs/set"
 )
 
@@ -48,13 +47,17 @@ func Pack[T any](elems ...T) []T {
 
 // Fill initial to each element of slice.
 func Fill[T any](slice []T, initial T) []T {
-	basicfuncs.ForRange(0, len(slice), 1, func(i int) bool { slice[i] = initial; return true })
+	for i := 0; i < len(slice); i++ {
+		slice[i] = initial
+	}
 	return slice
 }
 
 // FillBy f to each element of slice.
 func FillBy[T any](slice []T, f func(index int) T) []T {
-	basicfuncs.ForRange(0, len(slice), 1, func(i int) bool { slice[i] = f(i); return true })
+	for i := 0; i < len(slice); i++ {
+		slice[i] = f(i)
+	}
 	return slice
 }
 

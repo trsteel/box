@@ -6,6 +6,21 @@ import (
 	basicfuncs "github.com/trsteel/box/funcs/basic"
 )
 
+// Equal returns if a equals to b
+func Equal[T comparable](a, b T) bool {
+	return a == b
+}
+
+// Less returns if a is less than b
+func Less[T constraints.Ordered](a, b T) bool {
+	return a < b
+}
+
+// Larger returns if a is larger than b
+func Larger[T constraints.Ordered](a, b T) bool {
+	return a > b
+}
+
 // Between returns if value is in [lowerBound, upperBound].
 func Between[T constraints.Ordered](value, lowerBound, upperBound T) bool {
 	return lowerBound <= value && value <= upperBound

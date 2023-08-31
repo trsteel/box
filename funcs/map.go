@@ -1,9 +1,10 @@
 package funcs
 
 import (
-	basicfuncs "github.com/trsteel/box/funcs/basic"
 	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/maps"
+
+	basicfuncs "github.com/trsteel/box/funcs/basic"
 )
 
 // Keys returns all keys of map.

@@ -34,6 +34,8 @@ func ForEachKV[M ~map[K]V, K comparable, V any](m M, f func(K, V) bool) bool {
 
 // Reduce reduces slice to an accumulated result of running each element in slice by accumulator.
 func Reduce[T any, R any](slice []T, initial R, accumulator func(agg R, item T) R) R {
-	ForRange(0, len(slice), 1, func(i int) bool { initial = accumulator(initial, slice[i]); return true })
+	for i := 0; i < len(slice); i++ {
+		initial = accumulator(initial, slice[i])
+	}
 	return initial
 }
