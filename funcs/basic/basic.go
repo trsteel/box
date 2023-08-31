@@ -14,6 +14,23 @@ func Ternary[T any](cond bool, t T, f T) T {
 	return f
 }
 
+// ReflectIF returns value after reflect or zero if reflect failed.
+func ReflectIF[T any](value any, cond bool) (T, bool) {
+	if cond {
+		return value.(T), true
+	}
+	var zero T
+	return zero, false
+}
+
+// ReflectOR returns value after reflect or the fallback value if reflect failed.
+func ReflectOR[T any](value any, fallback T) T {
+	if v, ok := value.(T); ok {
+		return v
+	}
+	return fallback
+}
+
 // SortedKeys returns all keys of map in order.
 func SortedKeys[M ~map[K]V, K constraints.Ordered, V any](m M) []K {
 	keys := maps.Keys(m)

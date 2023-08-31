@@ -1,6 +1,10 @@
 package syncmap
 
-import "sync"
+import (
+	"sync"
+
+	basicfuncs "github.com/trsteel/box/funcs/basic"
+)
 
 // SyncMap is a wrap of sync.Map with certain K/V type.
 type SyncMap[K, V any] struct {
@@ -9,11 +13,7 @@ type SyncMap[K, V any] struct {
 
 // Load is a wrap of sync.Map's Load func with certain K/V type.
 func (s *SyncMap[K, V]) Load(key K) (value V, ok bool) {
-	if _value, _ok := s.Map.Load(key); _ok {
-		return _value.(V), _ok
-	}
-	var zero V
-	return zero, false
+	return basicfuncs.ReflectIF[V](s.Map.Load(key))
 }
 
 // Store is a wrap of sync.Map's Store func with certain K/V type.
@@ -23,17 +23,12 @@ func (s *SyncMap[K, V]) Store(key K, value V) {
 
 // LoadOrStore is a wrap of sync.Map's LoadOrStore func with certain K/V type.
 func (s *SyncMap[K, V]) LoadOrStore(key K, value V) (actual V, loaded bool) {
-	_actual, _loaded := s.Map.LoadOrStore(key, value)
-	return _actual.(V), _loaded
+	return basicfuncs.ReflectIF[V](s.Map.LoadOrStore(key, value))
 }
 
 // LoadAndDelete is a wrap of sync.Map's LoadAndDelete func with certain K/V type.
 func (s *SyncMap[K, V]) LoadAndDelete(key K) (value V, loaded bool) {
-	if _value, _loaded := s.Map.LoadAndDelete(key); _loaded {
-		return _value.(V), _loaded
-	}
-	var zero V
-	return zero, false
+	return basicfuncs.ReflectIF[V](s.Map.LoadAndDelete(key))
 }
 
 // Delete is a wrap of sync.Map's Delete func with certain K/V type.

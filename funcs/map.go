@@ -43,13 +43,13 @@ func ForEachKV[M ~map[K]V, K comparable, V any](m M, f func(K, V) bool) bool {
 }
 
 // Clone returns a copy of m.
-func Clone[K comparable, V any](m map[K]V) map[K]V {
+func Clone[M ~map[K]V, K comparable, V any](m M) M {
 	return maps.Clone(m)
 }
 
 // Merge merges multiple maps from left to right.
-func Merge[K comparable, V any](maps ...map[K]V) map[K]V {
-	out := map[K]V{}
+func Merge[M ~map[K]V, K comparable, V any](maps ...M) M {
+	out := M{}
 	for _, m := range maps {
 		for k, v := range m {
 			out[k] = v
