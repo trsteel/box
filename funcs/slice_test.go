@@ -5,9 +5,17 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	basicfuncs "github.com/trsteel/box/funcs/basic"
 )
+
+func TestContainsAny(t *testing.T) {
+	assert.True(t, ContainsAny([]int{1, 2, 3, 4, 5}, []int{5, 6, 7}))
+	assert.False(t, ContainsAny([]int{1, 2, 3, 4, 5}, []int{6, 7}))
+}
+
+func TestContainsAll(t *testing.T) {
+	assert.True(t, ContainsAll([]int{1, 2, 3, 4, 5}, []int{3, 4, 5}))
+	assert.False(t, ContainsAll([]int{1, 2, 3, 4, 5}, []int{4, 5, 6}))
+}
 
 func TestReverse(t *testing.T) {
 	slice := []int{1, 2, 3, 4, 5}
@@ -20,7 +28,7 @@ func TestMap(t *testing.T) {
 }
 
 func TestMapPtr(t *testing.T) {
-	assert.Equal(t, []string{"1", "2", "3"}, MapPtr([]int{1, 2, 3}, basicfuncs.Combine(FromPtr[int], strconv.Itoa)))
+	assert.Equal(t, []string{"1", "2", "3"}, MapPtr([]int{1, 2, 3}, Combine(FromPtr[int], strconv.Itoa)))
 }
 
 func TestRepeat(t *testing.T) {

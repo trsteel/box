@@ -1,6 +1,6 @@
 package set
 
-import basicfuncs "github.com/trsteel/box/funcs/basic"
+import "github.com/trsteel/box/funcs"
 
 // Set implements a set.
 type Set[T comparable] map[T]any
@@ -26,15 +26,15 @@ func (s Set[T]) Len() int {
 
 // Contains checks whether this set contains the element.
 func (s Set[T]) Contains(elem T) bool {
-	return basicfuncs.ContainsKey(s, elem)
+	return funcs.ContainsKey(s, elem)
 }
 
 // ContainsAny checks whether anyone is present in set.
 func (s Set[T]) ContainsAny(elems []T) bool {
-	return basicfuncs.ContainsAnyKey(s, elems)
+	return funcs.ContainsAnyKey(s, elems)
 }
 
 // ContainsAll checks whether all elems are present in set.
 func (s Set[T]) ContainsAll(elems []T) bool {
-	return basicfuncs.ContainsAllKeys(s, elems)
+	return funcs.ContainsAllKeys(s, elems)
 }

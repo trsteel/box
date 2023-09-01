@@ -3,8 +3,7 @@ package funcs
 import (
 	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/maps"
-
-	basicfuncs "github.com/trsteel/box/funcs/basic"
+	"golang.org/x/exp/slices"
 )
 
 // Keys returns all keys of map.
@@ -19,27 +18,35 @@ func Values[M ~map[K]V, K comparable, V any](m M) []V {
 
 // SortedKeys returns all keys of map in order.
 func SortedKeys[M ~map[K]V, K constraints.Ordered, V any](m M) []K {
-	return basicfuncs.SortedKeys(m)
+	keys := maps.Keys(m)
+	slices.Sort(keys)
+	return keys
 }
 
 // ContainsKey returns whether key is present in map.
 func ContainsKey[M ~map[K]V, K comparable, V any](m M, key K) bool {
-	return basicfuncs.ContainsKey(m, key)
+	_, ok := m[key]
+	return ok
 }
 
 // ContainsAnyKey returns whether any key is present in map.
 func ContainsAnyKey[M ~map[K]V, K comparable, V any](m M, keys []K) bool {
-	return basicfuncs.ContainsAnyKey(m, keys)
+	return !ForEach(keys, func(key K) bool { return !ContainsKey(m, key) })
 }
 
 // ContainsAllKeys returns whether all keys are present in map.
 func ContainsAllKeys[M ~map[K]V, K comparable, V any](m M, keys []K) bool {
-	return basicfuncs.ContainsAllKeys(m, keys)
+	return ForEach(keys, func(key K) bool { return ContainsKey(m, key) })
 }
 
 // ForEachKV apply f to each KV pair of map until f returns false.
 func ForEachKV[M ~map[K]V, K comparable, V any](m M, f func(K, V) bool) bool {
-	return basicfuncs.ForEachKV(m, f)
+	for k, v := range m {
+		if !f(k, v) {
+			return false
+		}
+	}
+	return true
 }
 
 // Clone returns a copy of m.

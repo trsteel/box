@@ -2,8 +2,6 @@ package funcs
 
 import (
 	"golang.org/x/exp/constraints"
-
-	basicfuncs "github.com/trsteel/box/funcs/basic"
 )
 
 // Equal returns if a equals to b
@@ -28,14 +26,30 @@ func Between[T constraints.Ordered](value, lowerBound, upperBound T) bool {
 
 // Max returns the maximum value between origin and each element of slice
 func Max[T constraints.Ordered](origin T, slice ...T) T {
-	return basicfuncs.Reduce(slice, origin, func(agg T, item T) T {
-		return basicfuncs.Ternary(agg >= item, agg, item)
-	})
+	return Reduce(slice, origin, Max2[T])
+}
+
+// Max2 returns the maximum value between a and b
+func Max2[T constraints.Ordered](a, b T) T {
+	return Ternary(a >= b, a, b)
 }
 
 // Min returns the minimum value between origin and each element of slice
 func Min[T constraints.Ordered](origin T, slice ...T) T {
-	return basicfuncs.Reduce(slice, origin, func(agg T, item T) T {
-		return basicfuncs.Ternary(agg <= item, agg, item)
-	})
+	return Reduce(slice, origin, Min2[T])
+}
+
+// Min2 returns the minimum value between a and b
+func Min2[T constraints.Ordered](a, b T) T {
+	return Ternary(a <= b, a, b)
+}
+
+// Sum returns the summation between origin and each element of slice
+func Sum[T constraints.Ordered](origin T, slice ...T) T {
+	return Reduce(slice, origin, Sum2[T])
+}
+
+// Sum2 returns the summation between a and b
+func Sum2[T constraints.Ordered](a, b T) T {
+	return a + b
 }

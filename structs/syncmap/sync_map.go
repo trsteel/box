@@ -3,7 +3,7 @@ package syncmap
 import (
 	"sync"
 
-	basicfuncs "github.com/trsteel/box/funcs/basic"
+	"github.com/trsteel/box/funcs"
 )
 
 // SyncMap is a wrap of sync.Map with certain K/V type.
@@ -13,7 +13,7 @@ type SyncMap[K, V any] struct {
 
 // Load is a wrap of sync.Map's Load func with certain K/V type.
 func (s *SyncMap[K, V]) Load(key K) (value V, ok bool) {
-	return basicfuncs.ReflectIF[V](s.Map.Load(key))
+	return funcs.ReflectIF[V](s.Map.Load(key))
 }
 
 // Store is a wrap of sync.Map's Store func with certain K/V type.
@@ -23,12 +23,12 @@ func (s *SyncMap[K, V]) Store(key K, value V) {
 
 // LoadOrStore is a wrap of sync.Map's LoadOrStore func with certain K/V type.
 func (s *SyncMap[K, V]) LoadOrStore(key K, value V) (actual V, loaded bool) {
-	return basicfuncs.ReflectIF[V](s.Map.LoadOrStore(key, value))
+	return funcs.ReflectIF[V](s.Map.LoadOrStore(key, value))
 }
 
 // LoadAndDelete is a wrap of sync.Map's LoadAndDelete func with certain K/V type.
 func (s *SyncMap[K, V]) LoadAndDelete(key K) (value V, loaded bool) {
-	return basicfuncs.ReflectIF[V](s.Map.LoadAndDelete(key))
+	return funcs.ReflectIF[V](s.Map.LoadAndDelete(key))
 }
 
 // Delete is a wrap of sync.Map's Delete func with certain K/V type.

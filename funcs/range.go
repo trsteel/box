@@ -1,6 +1,8 @@
-package basic
+package funcs
 
-import "golang.org/x/exp/constraints"
+import (
+	"golang.org/x/exp/constraints"
+)
 
 // ForRange apply f to each number in a sequence construct with step in range [start, end).
 func ForRange[T constraints.Integer | constraints.Float](start, end, step T, f func(T) bool) bool {
@@ -14,22 +16,12 @@ func ForRange[T constraints.Integer | constraints.Float](start, end, step T, f f
 
 // ForEach apply f to each element of slice until f returns false.
 func ForEach[T any](slice []T, f func(T) bool) bool {
-	return ForRange(0, len(slice), 1, func(i int) bool { return f(slice[i]) })
+	return ForRange(0, len(slice), 1, Combine(IndexFunc(slice), f))
 }
 
 // ForEachPtr apply f to each element of slice until f returns false.
 func ForEachPtr[T any](slice []T, f func(*T) bool) bool {
-	return ForRange(0, len(slice), 1, func(i int) bool { return f(&slice[i]) })
-}
-
-// ForEachKV apply f to each KV pair of map until f returns false.
-func ForEachKV[M ~map[K]V, K comparable, V any](m M, f func(K, V) bool) bool {
-	for k, v := range m {
-		if !f(k, v) {
-			return false
-		}
-	}
-	return true
+	return ForRange(0, len(slice), 1, Combine(Combine(IndexFunc(slice), ToPtr[T]), f))
 }
 
 // Reduce reduces slice to an accumulated result of running each element in slice by accumulator.
